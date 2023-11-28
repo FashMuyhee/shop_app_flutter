@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app_flutter/global_variables.dart';
+import 'package:shop_app_flutter/pages/product_details_page.dart';
 import 'package:shop_app_flutter/widgets/product_card.dart';
 
 class ProductList extends StatefulWidget {
@@ -103,7 +104,15 @@ class _ProductListState extends State<ProductList> {
             itemBuilder: (context, index) {
               final product = products[index];
               return GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (content) {
+                        return ProductDetailsPage(product: product);
+                      },
+                    ),
+                  );
+                },
                 child: ProductCard(
                   title: product['title'] as String,
                   price: product['price'] as double,
