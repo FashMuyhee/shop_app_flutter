@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app_flutter/global_variables.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_app_flutter/providers/CartProvider.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -11,6 +12,7 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
+    final cart = (Provider.of<CartProvider>(context).cart);
     return Scaffold(
       appBar: AppBar(
         title: Text(
