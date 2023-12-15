@@ -10,9 +10,19 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  void onRemoveFromCart(Map<String, dynamic> product) {
+    context.read<CartProvider>().removeProduct(product);
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: const Text(
+          'Product Removed Successfully',
+        ),
+        backgroundColor: Colors.tealAccent.shade400));
+  }
+
   @override
   Widget build(BuildContext context) {
-    final cart = (Provider.of<CartProvider>(context).cart);
+    final cart = context.watch<CartProvider>().cart;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -28,10 +38,9 @@ class _CartPageState extends State<CartPage> {
           return Dismissible(
             // Specify the direction to swipe and delete
             direction: DismissDirection.endToStart,
-            key: Key('ee'),
+            key: Key(item['id']),
             onDismissed: (direction) {
-              // Removes that item the list on swipwe
-
+              onRemoveFromCart(item);
               // Shows the information on Snackbar
             },
             background: Container(color: Colors.red),
