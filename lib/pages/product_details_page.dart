@@ -18,7 +18,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
   void onAddToCart() {
     if (selectedSize != 0) {
-      Provider.of<CartProvider>(context, listen: false)
+      context
+          .read<CartProvider>()
           .addProduct({...widget.product, 'size': selectedSize});
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: const Text(
